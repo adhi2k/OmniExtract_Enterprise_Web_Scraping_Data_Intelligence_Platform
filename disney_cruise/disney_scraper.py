@@ -1,10 +1,7 @@
 """
-Relu Consultancy Hiring Challenge - Data Extraction Engineer (FTE)
-Challenge Objective 1: Disney Cruise Line Data Scraper (High-Yield Multi-Region)
-Target URL: https://disneycruise.disney.go.com/en-in/
-
-Author: Autonomous Data Extraction Engineer
-Sector: SECTOR 7G | Operator: aiwolfie
+OmniExtract Data Pipeline - Maritime Division
+Target: Disney Cruise Line (disneycruise.disney.go.com)
+Automated Multi-Region Dynamic Scraping Engine
 """
 
 import os
@@ -582,7 +579,7 @@ class DisneyCruiseScraper:
 
         terminal_report = f"""
 ================================================================================
-RELU CONSULTANCY FTE CHALLENGE 1 - TERMINAL EVALUATION REPORT
+OMNIEXTRACT MARITIME PIPELINE - DISNEY CRUISE LINE EXTRACTION REPORT
 Target: Disney Cruise Line (disneycruise.disney.go.com)
 ================================================================================
 (i)   Total cruises for the Pacific as a destination: {q1_pacific_count}

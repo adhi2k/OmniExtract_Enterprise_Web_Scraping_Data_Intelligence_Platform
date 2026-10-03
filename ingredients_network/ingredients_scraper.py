@@ -1,10 +1,7 @@
 """
-Relu Consultancy Hiring Challenge - Data Extraction Engineer (FTE)
-Challenge Objective 2: Ingredients Network Data Scraper (Refined & Validated)
-Target URL: https://www.ingredientsnetwork.com/
-
-Author: Autonomous Data Extraction Engineer
-Sector: SECTOR 7G | Operator: aiwolfie
+OmniExtract Data Pipeline - Global B2B Ingredients Division
+Target: Ingredients Network (ingredientsnetwork.com)
+Automated B2B Supplier Profile & Taxonomy Scraper
 """
 
 import os
@@ -520,7 +517,7 @@ class IngredientsNetworkScraper:
 
         terminal_report = f"""
 ================================================================================
-RELU CONSULTANCY FTE CHALLENGE 2 - TERMINAL EVALUATION REPORT
+OMNIEXTRACT B2B PIPELINE - INGREDIENTS NETWORK SUPPLIERS REPORT
 Target: Ingredients Network (ingredientsnetwork.com)
 ================================================================================
 (i)   Total ingredients count (taxonomy facet): {total_ingredients_count}

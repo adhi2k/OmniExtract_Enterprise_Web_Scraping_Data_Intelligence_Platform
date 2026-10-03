@@ -1,8 +1,7 @@
 """
-Relu Consultancy Hiring Challenge - Bonus Track Dashboard
-Dynamic Full-Stack Persistence & Presentation Engine
+OmniExtract - Enterprise Data Extraction Platform
+Full-Stack Persistence & Presentation Dashboard
 Framework: FastAPI + Modern Dark Glassmorphic UI
-Author: Autonomous Data Extraction Engineer | Operator: aiwolfie
 """
 
 import os
@@ -12,7 +11,7 @@ from typing import Optional, Dict, Any
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse, JSONResponse
 
-app = FastAPI(title="Relu Data Extraction Live Dashboard", version="2.0.0")
+app = FastAPI(title="OmniExtract Live Analytics Dashboard", version="2.0.0")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,7 +37,6 @@ def load_disney_df() -> pd.DataFrame:
 def load_ingredients_df() -> pd.DataFrame:
     if os.path.exists(INGREDIENTS_CSV):
         df = pd.read_csv(INGREDIENTS_CSV).fillna("")
-        # Strictly filter out non-company rows like 'PRODUCT'
         if "Company Name" in df.columns:
             df = df[~df["Company Name"].str.upper().isin(["PRODUCT", "COMPANY", "NAN", ""])]
         return df
@@ -49,7 +47,6 @@ def get_live_metrics() -> Dict[str, Any]:
     disney_df = load_disney_df()
     ingr_df = load_ingredients_df()
 
-    # Disney Metrics
     total_disney = len(disney_df)
     pacific_count = 0
     holiday_count = 0
@@ -81,7 +78,6 @@ def get_live_metrics() -> Dict[str, Any]:
         )
         miami_london = int(miami_london_mask.sum())
 
-    # Ingredients Metrics
     total_companies = len(ingr_df)
     total_ingredients_catalog = 0
     total_finished_catalog = 0
@@ -89,7 +85,6 @@ def get_live_metrics() -> Dict[str, Any]:
     delivery_formats = 0
     cognitive_health = 0
 
-    # Load from answers json if present
     if os.path.exists(INGREDIENTS_ANSWERS_JSON):
         try:
             with open(INGREDIENTS_ANSWERS_JSON, "r", encoding="utf-8") as f:
@@ -177,7 +172,7 @@ def dashboard_home():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relu Consultancy | Data Extraction Engineer Challenge Dashboard</title>
+    <title>OmniExtract | Web Extraction & Analytics Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {{
@@ -327,16 +322,16 @@ def dashboard_home():
 <body>
     <div class="header">
         <div>
-            <h1>Relu Consultancy Data Extraction Challenge</h1>
-            <p style="color: var(--text-muted); margin-top: 6px;">Live Extracted Dataset & Persistence Audit Dashboard</p>
+            <h1>OmniExtract Data Intelligence Platform</h1>
+            <p style="color: var(--text-muted); margin-top: 6px;">Enterprise Web Scraping, Data Cleansing & Live Telemetry</p>
         </div>
-        <div class="badge">OPERATOR: aiwolfie | SECTOR 7G</div>
+        <div class="badge">PRODUCTION PIPELINE | ACTIVE</div>
     </div>
 
     <!-- Executive Metrics Grid: Computed Dynamically -->
     <div class="metrics-grid">
         <div class="metric-card">
-            <div class="metric-title">Disney Cruises Loaded</div>
+            <div class="metric-title">Disney Cruises Ingested</div>
             <div class="metric-value">{metrics['disney_total']}</div>
             <div class="metric-sub">Pacific: {metrics['disney_pacific']} | Holiday: {metrics['disney_holiday']}</div>
         </div>
@@ -346,7 +341,7 @@ def dashboard_home():
             <div class="metric-sub">Miami / London Departures: {metrics['disney_miami_london']}</div>
         </div>
         <div class="metric-card">
-            <div class="metric-title">Ingredients Companies</div>
+            <div class="metric-title">B2B Suppliers Ingested</div>
             <div class="metric-value">{metrics['ingredients_companies']}</div>
             <div class="metric-sub">Herbs & Spices: {metrics['herbs_spices_count']} | Delivery: {metrics['delivery_formats_count']}</div>
         </div>
@@ -359,8 +354,8 @@ def dashboard_home():
 
     <!-- Navigation Tabs -->
     <div class="tabs-nav">
-        <button class="tab-btn active" onclick="switchTab('disney')">🚢 Disney Cruise Line (Challenge 1 - {len(disney_df)} Records)</button>
-        <button class="tab-btn" onclick="switchTab('ingredients')">🌿 Ingredients Network (Challenge 2 - {len(ingr_df)} Companies)</button>
+        <button class="tab-btn active" onclick="switchTab('disney')">🚢 Disney Cruise Line ({len(disney_df)} Records)</button>
+        <button class="tab-btn" onclick="switchTab('ingredients')">🌿 Global Ingredients Network ({len(ingr_df)} Companies)</button>
     </div>
 
     <!-- Disney Cruise View -->

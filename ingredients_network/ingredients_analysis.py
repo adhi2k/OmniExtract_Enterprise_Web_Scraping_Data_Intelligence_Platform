@@ -1,12 +1,6 @@
 """
-Relu Consultancy Hiring Challenge - Challenge 2 Analysis Script (Reconciled)
-Target: Ingredients Network (ingredientsnetwork.com)
-Computes answers to the 5 mandatory evaluation questions:
-(i) How many total ingredients are there? (count)
-(ii) How many total finished products are there?
-(iii) How many companies have herbs and spices?
-(iv) How many companies have physical delivery formats?
-(v) How many companies are in Cognitive & Mental Health?
+OmniExtract Analytics Engine - B2B Ingredients Division
+Taxonomy analysis and supplier metrics module
 """
 
 import os
@@ -86,7 +80,7 @@ def analyze_ingredients_data(csv_path: str = "results_ingredients.csv"):
 
     report = f"""
 ================================================================================
-RELU CONSULTANCY FTE CHALLENGE 2 - TERMINAL EVALUATION REPORT
+OMNIEXTRACT B2B PIPELINE - INGREDIENTS NETWORK EVALUATION REPORT
 Target: Ingredients Network (ingredientsnetwork.com)
 ================================================================================
 (i)   Total ingredients count: {total_ingredients}

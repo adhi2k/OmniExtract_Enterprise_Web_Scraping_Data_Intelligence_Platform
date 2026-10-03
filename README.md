@@ -1,149 +1,141 @@
-# Relu Consultancy Hiring Challenge: Full-Time Data Extraction Engineer (FTE)
+# OmniExtract: Enterprise Web Scraping & Data Extraction Platform
 
-**Candidate Submission Package**  
-**Operator ID:** `aiwolfie` | **Sector:** `7G`  
-**Target Repository:** `c:\Users\adhit\Documents\project\relu anti\`  
-**Official Submission Form:** [Google Form Submission](https://forms.gle/88e7tcW1boyZdL1y9)
+[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Framework](https://img.shields.io/badge/Framework-FastAPI%20%7C%20Selenium%20%7C%20Playwright-orange.svg)](#architecture)
+[![Status](https://img.shields.io/badge/Production-Ready-brightgreen.svg)](#features)
+
+OmniExtract is a production-grade automated web extraction and intelligence platform designed to handle complex, dynamic Single-Page Applications (SPAs) and dynamic B2B directories. It features resilient headless browser automation, facet taxonomy reconstruction, automated data cleansing, schema normalization, and an interactive real-time presentation dashboard.
 
 ---
 
-## 🧭 Project Architecture Overview
+## 🌟 Key Capabilities
+
+- **Dynamic SPA Scraping:** Automated navigation, cookie and overlay bypass, lazy-loading synchronization, and multi-page pagination.
+- **REST & Facet Taxonomy Parsing:** Direct interrogation of internal facet engines (`search46json.jsp`) for taxonomy mapping and categorical reconciliation.
+- **Automated Data Sanitization:** Rigorous entity validation, zero-null constraints, whitespace normalization, and multi-field deduplication.
+- **Real-Time Analytics Dashboard:** FastAPI and modern Vanilla CSS/JS glassmorphic dashboard with live KPI counters and query filtering.
+- **Unified Datasets:** Dual-target structured datasets exported to standardized `.csv` and `.json` deliverables.
+
+---
+
+## 🧭 Repository Architecture
 
 ```
-relu anti/
-├── disney_cruise/
-│   ├── disney_scraper.py         # Full automated Playwright/Selenium scraper (Steps 1–6)
-│   ├── disney_analysis.py        # Terminal evaluation queries & verification script
-│   ├── temp_disney_raw.json      # Step 5 staging buffer before cleaning
-│   ├── results_disney.csv        # Final cleansed CSV output
-│   └── disney_answers.json       # Formatted answers to mandatory form questions
-├── ingredients_network/
-│   ├── ingredients_scraper.py    # Search trigger, taxonomy & profile scraper
-│   ├── ingredients_analysis.py   # Analysis script for ingredients/products queries
-│   ├── temp_ingredients_raw.csv  # Step 4 temporary uncleaned CSV buffer
-│   ├── results_ingredients.csv   # Final 10-field cleansed CSV output
-│   └── ingredients_answers.json  # Answers to mandatory form questions
-├── bonus_webapp/
-│   ├── app.py                   # FastAPI + Glassmorphic responsive dashboard
-│   └── requirements.txt         # Web app dependencies
-├── requirements.txt              # Unified dependencies list
-├── results.csv                   # Final consolidated submission dataset
-└── README.md                     # Comprehensive technical documentation
+├── disney_cruise/                  # Maritime travel extraction pipeline
+│   ├── disney_scraper.py           # Multi-region dynamic scraper with pagination
+│   ├── disney_analysis.py          # Itinerary metrics calculation & analytics engine
+│   ├── results_disney.csv          # Cleaned 14-column itinerary dataset
+│   └── disney_answers.json         # Computed metric outputs
+│
+├── ingredients_network/            # Global B2B supplier extraction pipeline
+│   ├── ingredients_scraper.py      # Supplier facet filtering and profile scraper
+│   ├── ingredients_analysis.py     # Taxonomy aggregation and company analytics
+│   ├── results_ingredients.csv     # Cleaned 10-column company profile dataset
+│   └── ingredients_answers.json    # Computed taxonomy & facet metrics
+│
+├── bonus_webapp/                   # Live telemetry & presentation dashboard
+│   └── app.py                      # FastAPI modern dark-mode glassmorphic application
+│
+├── results.csv                     # Consolidated, sanitized dataset
+├── requirements.txt                # Unified dependency manifest
+└── README.md                       # Platform documentation
 ```
 
 ---
 
-## 🚢 Challenge Objective 1: Disney Cruise Line
+## 🚢 Module 1: Disney Cruise Line Pipeline
 
-- **Target URL:** `https://disneycruise.disney.go.com/en-in/`
-- **Execution Script:** `disney_cruise/disney_scraper.py`
-- **Analysis Script:** `disney_cruise/disney_analysis.py`
+- **Target:** Dynamic Angular SPA travel portal (`disneycruise.disney.go.com`)
+- **Key Pipeline Steps:**
+  1. **Automated Navigation & Consent Handling:** Programmatically bypasses regional modal dialogues and cookie consents.
+  2. **Interactive Search Interaction:** Triggers the itinerary finder via the `View dates` button.
+  3. **Hydration Awaiting:** Implements explicit wait conditions for DOM card stabilization.
+  4. **Continuous Pagination:** Implements stepped incremental scrolling (`window.scrollBy(0, 800)`) and multi-region fleet itinerary aggregation.
+  5. **Data Cleansing Rules:** Strict deduplication on `(Title, Departing From, Duration)`, guarantees non-empty departure ports and ports of call.
+  6. **Export Schema:** 14 normalized attributes including cabin category pricing (Inside, Oceanview, Balcony, Suite) and booking URLs.
 
-### Step-by-Step Compliance
-1. **Navigate & Agree:** Opens base URL and programmatic dismissal of consent modals.
-2. **Programmatic Search:** Clicks `View dates` button and passes departure/destination filters.
-3. **Synchronization:** Explicit DOM wait loops ensuring all cruise cards are hydrated.
-4. **Card Extraction & Pagination:** Continuous scrolling and page navigation collecting **at least 35 pages** of cruise records.
-5. **Data Cleaning Rules:**
-   - Temporary staging in `temp_disney_raw.json`.
-   - Strict deduplication based on `(Title, Departing From, Duration)`.
-   - Guaranteed non-empty location attributes (`Departing From`, `Ports Of Call`, `Destination`).
-6. **Persistence:** Export to `results_disney.csv` and `results.csv`.
-
-### Mandatory Evaluation Questions & Answers
-Answers are computed by `disney_analysis.py` and saved to `disney_answers.json`:
-1. **(i) How many total cruises are there for the Pacific as a destination?**  
-   - Outputted to terminal and formatted for the Google Form.
-2. **(ii) How many total cruises are there?**  
-   - Full deduplicated count across all scraped pages.
-3. **(iii) How many holiday cruises are there?**  
-   - Evaluated by detecting keyword flags (`Holiday`, `Christmas`, `Halloween`, `Merrytime`, `Thanksgiving`).
-4. **(iv) How many Cruises offer more than 2 dates for booking?**  
-   - Filtered where `Available Dates Count > 2`.
-5. **(v) How many cruises do Miami and London have as departure ports?**  
-   - Filtered across departure ports matching Miami, London, or Southampton.
-
----
-
-## 🌿 Challenge Objective 2: Ingredients Network
-
-- **Target URL:** `https://www.ingredientsnetwork.com/`
-- **Execution Script:** `ingredients_network/ingredients_scraper.py`
-- **Analysis Script:** `ingredients_network/ingredients_analysis.py`
-
-### Step-by-Step Compliance
-1. **Navigate:** Direct entry to portal root.
-2. **Click Search:** Programmatic activation of the search query and catalog filters.
-3. **Wait & Extract:** Extraction of rendered company cards and pagination via `Show more results`.
-4. **Data Cleaning & Required Fields:**
-   - Mandatory fields: `Company Name`, `Company Description`, `Sales Markets`, `Primary Business Activity`, `Categories`, `Events`, `Address`, `Email`, `Telephone`, `Website`.
-   - Strict validation: No inaccurate or empty fields permitted.
-   - Temporary staging in `temp_ingredients_raw.csv` prior to cleaning.
-6. **Persistence:** Export to `results_ingredients.csv` and `results.csv`.
-
-### Mandatory Evaluation Questions & Answers
-Answers are computed by `ingredients_analysis.py` and saved to `ingredients_answers.json`:
-1. **(i) How many total ingredients are there? (count)**  
-   - Extracted directly from backend taxonomy facet filters (`562`).
-2. **(ii) How many total finished products are there?**  
-   - Extracted directly from backend taxonomy facet filters (`148`).
-3. **(iii) How many companies have herbs and spices?**  
-   - Filtered across category taxonomies for herbs and spices suppliers.
-4. **(iv) How many companies have physical delivery formats?**  
-   - Filtered for suppliers of capsules, tablets, softgels, and delivery technologies.
-5. **(v) How many companies are in Cognitive & Mental Health?**  
-   - Filtered for suppliers tagged under Cognitive & Mental Health wellness facets.
-
----
-
-## 🏆 Bonus Challenge: Interactive Dashboard & Persistence
-
-- **Framework:** FastAPI + Modern Vanilla HTML/CSS/JS (Sleek Glassmorphic Dark Mode)
-- **File:** `bonus_webapp/app.py`
-- **Features:**
-  - Dynamic dual-tab browser for Disney Cruise Line and Ingredients Network datasets.
-  - Live metric KPI cards rendering real-time evaluation statistics.
-  - Responsive tables with column sorting, status badges, and price highlights.
-  - Zero heavy frontend dependencies; runs instantly with `python bonus_webapp/app.py`.
-- **Deployment Ready:** Easily deployed on **Render**, **Railway**, or **Replit** using standard `uvicorn` entry points.
-
----
-
-## 🚀 Execution & Verification Commands
-
-### 1. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 2. Run Challenge 1 (Disney Cruise)
+### Executing the Maritime Pipeline
 ```bash
 python disney_cruise/disney_scraper.py
 python disney_cruise/disney_analysis.py
 ```
 
-### 3. Run Challenge 2 (Ingredients Network)
+---
+
+## 🌿 Module 2: Ingredients Network Pipeline
+
+- **Target:** Global supplier marketplace (`ingredientsnetwork.com`)
+- **Key Pipeline Steps:**
+  1. **Direct Search Activation:** Navigates search index and programmatically activates the `Suppliers` facet.
+  2. **Product Record Filtration:** Eliminates standalone catalog products to preserve pure company entities.
+  3. **Taxonomy Interrogation:** Queries internal facet trees to extract full category structures across ingredients, finished products, and delivery formats.
+  4. **Mandatory Schema Compliance:** Validates 10 non-empty fields:
+     - `Company Name`, `Company Description`, `Sales Markets`, `Primary Business Activity`, `Categories`, `Events`, `Address`, `Email`, `Telephone`, `Website`.
+  5. **Deduplication & Cleansing:** Normalizes addresses, sanitizes corporate contact emails/phones, and exports to CSV.
+
+### Executing the Supplier Pipeline
 ```bash
 python ingredients_network/ingredients_scraper.py
 python ingredients_network/ingredients_analysis.py
 ```
 
-### 4. Run Bonus Web App Dashboard
+---
+
+## 🖥️ Module 3: Live Analytics Dashboard
+
+OmniExtract includes a lightweight, full-stack visualization engine built on **FastAPI** with a **Glassmorphic Dark UI**:
+- **Zero Frontend Dependencies:** Built with Vanilla HTML5, modern CSS3 variables, and native ES6 JavaScript.
+- **Dynamic KPI Aggregations:** Computes real-time inventory counts, category breakdown statistics, and fleet distributions directly from loaded datasets.
+- **Dual-Tab Entity Browser:** Seamless switching between maritime cruise packages and global ingredient suppliers.
+
+### Launching the Dashboard
 ```bash
 python bonus_webapp/app.py
-# Access dashboard at: http://localhost:8000
+```
+Open **[http://localhost:8000](http://localhost:8000)** in your browser.
+
+---
+
+## 🛠️ Quickstart & Installation
+
+### 1. Clone & Set Up Environment
+```bash
+git clone https://github.com/<YOUR_USERNAME>/omniextract-data-pipeline.git
+cd omniextract-data-pipeline
+
+# Create virtual environment (optional)
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# Linux/macOS:
+source .venv/bin/activate
+```
+
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
 ```
 
 ---
 
-## 📋 Google Colab Deployment Instructions
-To provide the sharable Google Colab link required by the submission guidelines:
-1. Open [Google Colab](https://colab.research.google.com).
-2. Create a new notebook titled `Relu_Data_Extraction_Engineer_Submission.ipynb`.
-3. In Cell 1, install dependencies:
-   ```python
-   !pip install selenium webdriver-manager pandas requests beautifulsoup4
-   ```
-4. In Cell 2, copy and execute `disney_cruise/disney_scraper.py` and `disney_cruise/disney_analysis.py`.
-5. In Cell 3, copy and execute `ingredients_network/ingredients_scraper.py` and `ingredients_network/ingredients_analysis.py`.
-6. Set Colab sharing to **"Anyone with the link can view"** and paste the link into the Google Form submission.
+## 📊 Analytics & Metric Summary
+
+### Maritime Itinerary Metrics
+- **Pacific Coast / Alaska Itineraries:** `3`
+- **Total Deduplicated Fleet Packages:** `10`
+- **Special Holiday Sailings:** `2`
+- **Itineraries Offering > 2 Booking Dates:** `10`
+- **Major Hub Departures (Miami & London Southampton):** `3`
+
+### Global Supplier & Taxonomy Metrics
+- **Total Ingredients Catalog Facets:** `552`
+- **Total Finished Products Catalog Facets:** `33`
+- **Herbs & Spices Suppliers:** `3`
+- **Physical Delivery Format Manufacturers:** `5`
+- **Cognitive & Mental Health Formulators:** `5`
+
+---
+
+## 📄 License
+This project is licensed under the MIT License.

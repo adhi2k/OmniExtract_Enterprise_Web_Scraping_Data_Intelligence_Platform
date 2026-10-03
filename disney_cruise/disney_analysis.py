@@ -1,11 +1,6 @@
 """
-Relu Consultancy Hiring Challenge - Challenge 1 Analysis Script
-Computes answers to the 5 mandatory evaluation questions from results_disney.csv or results.csv:
-(i) How many total cruises are there for the Pacific as a destination? (count)
-(ii) How many total cruises are there?
-(iii) How many holiday cruises are there?
-(iv) How many Cruises offer more than 2 dates for booking?
-(v) How many cruises do Miami and London have as departure ports?
+OmniExtract Analytics Engine - Maritime Division
+Itinerary metrics and validation module
 """
 
 import os
@@ -60,7 +55,7 @@ def analyze_disney_data(csv_path: str = "results_disney.csv"):
 
     report = f"""
 ================================================================================
-RELU CONSULTANCY FTE CHALLENGE 1 - TERMINAL EVALUATION REPORT
+OMNIEXTRACT MARITIME PIPELINE - DISNEY CRUISE LINE EVALUATION REPORT
 Target: Disney Cruise Line (disneycruise.disney.go.com)
 ================================================================================
 (i)   Total cruises for the Pacific as a destination: {q1}
