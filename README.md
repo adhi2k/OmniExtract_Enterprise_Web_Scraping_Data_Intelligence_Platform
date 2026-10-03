@@ -101,7 +101,7 @@ Open **[http://localhost:8000](http://localhost:8000)** in your browser.
 
 ### 1. Clone & Set Up Environment
 ```bash
-git clone https://github.com/<YOUR_USERNAME>/omniextract-data-pipeline.git
+git clone https://github.com/adhi2k/OmniExtract_Enterprise_Web_Scraping_Data_Intelligence_Platform.git
 cd omniextract-data-pipeline
 
 # Create virtual environment (optional)
