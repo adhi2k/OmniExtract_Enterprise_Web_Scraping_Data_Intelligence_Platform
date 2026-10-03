@@ -23,8 +23,13 @@ INGREDIENTS_CSV = os.path.join(BASE_DIR, "ingredients_network", "results_ingredi
 if not os.path.exists(INGREDIENTS_CSV):
     INGREDIENTS_CSV = os.path.join(BASE_DIR, "results_ingredients.csv")
 
-DISNEY_ANSWERS_JSON = os.path.join(BASE_DIR, "disney_answers.json")
-INGREDIENTS_ANSWERS_JSON = os.path.join(BASE_DIR, "ingredients_answers.json")
+DISNEY_ANSWERS_JSON = os.path.join(BASE_DIR, "disney_cruise", "disney_answers.json")
+if not os.path.exists(DISNEY_ANSWERS_JSON):
+    DISNEY_ANSWERS_JSON = os.path.join(BASE_DIR, "disney_answers.json")
+
+INGREDIENTS_ANSWERS_JSON = os.path.join(BASE_DIR, "ingredients_network", "ingredients_answers.json")
+if not os.path.exists(INGREDIENTS_ANSWERS_JSON):
+    INGREDIENTS_ANSWERS_JSON = os.path.join(BASE_DIR, "ingredients_answers.json")
 
 
 def load_disney_df() -> pd.DataFrame:
